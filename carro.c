@@ -104,20 +104,28 @@ int main()
 
     while(1){
 
-        clrscr();
+        // clrscr();
 
         // printf("\n\nMapa Real\n\n");
         // exibir_mapa(mapa_real);
-
-        printf("\n\nMapa Scaneado\n\n");
-        exibir_mapa_scaneado(mapa_scaneado,carro);
 
         scanear(mapa_real, mapa_scaneado, carro );
 
 
         //da um passo aleatorio
-        puts("DANDO PASSO ALEATORIO");
-        obter_direcao(carro, mapa_real, mapa_scaneado);
+        for(int i = 0; i < 5; i++){
+            clrscr();
+            puts("DANDO PASSO ALEATORIO");
+            obter_direcao(carro, mapa_real, mapa_scaneado);
+            scanear(mapa_real, mapa_scaneado, carro );
+            exibir_mapa_scaneado(mapa_scaneado,carro);
+            getchar();
+
+        }
+
+        clrscr();
+        printf("\n\nMapa Scaneado\n\n");
+        exibir_mapa_scaneado(mapa_scaneado,carro);
 
         iteracoes ++;
         printf("Iteracao: %ld\n", iteracoes);
@@ -144,9 +152,10 @@ int main()
         puts("\nSETOR MENOS EXPLORADO\n\n");
         exibir_setor(min_setor);
 
-        node* n = astar(mapa_scaneado, DIM, OBSTACULO, carro->x, carro->y, target_x, target_y);
+        puts("Pressione Enter para Continuar...");
+        getchar();
 
-        puts("A* acabou de executar\n");
+        node* n = astar(mapa_scaneado, DIM, OBSTACULO, carro->x, carro->y, target_x, target_y);
 
         lista* path = build_path(n);
         // print_list(path);
